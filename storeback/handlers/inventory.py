@@ -1,9 +1,38 @@
-from flask import Blueprint
-
+from flask import Blueprint, request, jsonify
+from storeback.models import db
+from storeback.models.inventories import Inventory
 
 inventory_api = Blueprint('inventory_api', __name__)
 
-@inventory_api.route('/api/inventory/', methods=['GET'])
-def ping():
-    return 'Inventory API hit'
+@inventory_api.route('/api/inventory/<id>', methods=['GET'])
+def get_one_item_by_id(id):
+    item = Inventory.query.filter_by(id=id).first_or_404()
+    return jsonify(item.to_json())
+
+@inventory_api.route('/api/inventory', methods=['POST'])
+def create_one_item():
+    if not request.json:
+        return "Please provide a valid JSON body with your request", 400
+
+    item = Inventory()
+    item.name = request.json.get('name')
+    item.price = request.json.get('price')
+    db.session.add(item)
+    db.session.commit()
+
+    return jsonify(item.to_json())
+
+@inventory_api.route('/api/inventory/<id>', methods=['PATCH'])
+def patch_one_item(id):
+    if not request.json:
+        return "Please provide a valid JSON body with your request", 400
+    
+    item = Inventory.query.filter_by(id=id).first_or_404()
+    item.update(request.json)
+    db.session.commit()
+
+    patched_item = Inventory.query.filter_by(id=id).first_or_404()
+    return jsonify(patched_item.to_json())
+
+    
 
