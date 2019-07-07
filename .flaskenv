@@ -1,6 +1,3 @@
 FLASK_APP=storeback.wsgi
 FLASK_RUN_PORT=8000
 SQLALCHEMY_TRACK_MODIFICATIONS=False
-DATABASE_URL=storeback/app.db
-
-
