@@ -3,8 +3,6 @@ from flask_migrate import Migrate
 from .config import Config
 from .models import db
 from .handlers import routes
-from .handlers.inventory import inventory_api
-from .handlers.merchant import merchant_api
 
 
 def create_app():
@@ -13,8 +11,7 @@ def create_app():
     db.init_app(app)
     db.app = app
     migrate = Migrate(app, db)
-    app.register_blueprint(inventory_api)
-    app.register_blueprint(merchant_api)
-    app.register_blueprint(routes)
+    for route in routes:
+        app.register_blueprint(route)
 
     return app
