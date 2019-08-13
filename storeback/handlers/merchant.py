@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from storeback.models.merchants import Merchant
+from storeback.models.inventories import Inventory
 from storeback.models import db
 
 
@@ -7,13 +8,20 @@ merchant_api = Blueprint('merchant', __name__)
 
 @merchant_api.route('/api/merchant', methods=['GET'])
 def get_all_merchants():
-    merchants = Merchant.query.all()
+    params = request.args
+    merchants = Merchant.query.filter_by(**params).all()
     return jsonify([merchant.to_json() for merchant in merchants])
 
 @merchant_api.route('/api/merchant/<int:id>', methods=['GET'])
 def get_one_merchant(id):
     merchant = Merchant.query.filter_by(id=id).first_or_404()
     return jsonify(merchant.to_json())
+
+@merchant_api.route('/api/merchant/<int:id>/items', methods=['GET'])
+def get_merchant_items(id):
+    params = request.args
+    merchant_items = Merchant.query.filter_by(id=id).join(Inventory).filter_by(**params)
+    return jsonify([item.to_json() for item in merchant_items])
 
 @merchant_api.route('/api/merchant', methods=['POST'])
 def create_one_merchant():

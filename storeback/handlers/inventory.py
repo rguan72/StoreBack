@@ -22,6 +22,7 @@ def create_one_item():
     item = Inventory()
     item.name = request.json.get('name')
     item.price = request.json.get('price')
+    item.merchant_id = request.json.get('merchant_id')
     db.session.add(item)
     db.session.commit()
 
