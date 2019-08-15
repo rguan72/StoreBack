@@ -3,12 +3,12 @@ from . import db
 from .inventories import Inventory
 
 carted_items = db.Table('carted_items',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('inventory_id', db.Integer, db.ForeignKey('inventory.id'), primary_key=True)
 )
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(255), nullable=False)
     lastname = db.Column(db.String(255), nullable=False)
