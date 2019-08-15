@@ -11,6 +11,7 @@ flask-migrate = "*"
 pytest = "*"
 sqlalchemy-utils = "*"
 python-dotenv = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.7"
