@@ -20,7 +20,7 @@ def get_one_merchant(id):
 @merchant_api.route('/api/merchant/<int:id>/items', methods=['GET'])
 def get_merchant_items(id):
     params = request.args
-    merchant_items = Merchant.query.filter_by(id=id).join(Inventory).filter_by(**params)
+    merchant_items = Inventory.query.filter_by(merchant_id=id).filter_by(**params).all()
     return jsonify([item.to_json() for item in merchant_items])
 
 @merchant_api.route('/api/merchant', methods=['POST'])
