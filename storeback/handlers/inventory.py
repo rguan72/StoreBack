@@ -6,7 +6,8 @@ inventory_api = Blueprint('inventory_api', __name__)
 
 @inventory_api.route('/api/inventory', methods=['GET'])
 def get_all_items():
-    items = Inventory.query.all()
+    params = request.args
+    items = Inventory.query.filter_by(**params).all()
     return jsonify([item.to_json() for item in items])
 
 @inventory_api.route('/api/inventory/<int:id>', methods=['GET'])
