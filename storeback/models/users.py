@@ -21,7 +21,7 @@ class User(db.Model):
         res = {}
         for field in ('id', 'firstname', 'lastname', 'email', 'created', 'updated'):
             res[field] = getattr(self, field)
-            
+        res['carted'] = [carted_item.to_json() for carted_item in self.carted]
         return res
 
     def __repr__(self):
