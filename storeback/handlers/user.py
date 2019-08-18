@@ -18,7 +18,7 @@ def get_one_user(id):
 @user_api.route('/api/user/<int:id>/cart', methods=['GET'])
 def get_carted_items(id):
     user = User.query.filter_by(id=id).first_or_404()
-    return jsonify(user.to_json()['carted'])
+    return jsonify([carted_item.to_json() for carted_item in user.carted])
 
 @user_api.route('/api/user', methods=['POST'])
 def create_one_user():
