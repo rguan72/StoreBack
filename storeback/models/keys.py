@@ -18,3 +18,4 @@ class Key(db.Model):
 
     def __repr__(self):
         f'API key with value {self.value}'
+        
