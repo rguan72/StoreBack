@@ -30,6 +30,7 @@ def create_one_admin():
     admin.firstname = request.json['firstname']
     admin.lastname = request.json['lastname']
     admin.email = request.json['email']
+    admin.password = request.json['password']
     db.session.add(admin)
     db.session.commit()
     return jsonify(admin.to_json())

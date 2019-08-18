@@ -13,6 +13,7 @@ class User(db.Model):
     firstname = db.Column(db.String(255), nullable=False)
     lastname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
+    password = db.Column(db.Unicode(128))
     carted = db.relationship('Inventory', secondary=carted_items, lazy='subquery', backref=db.backref('inventory', lazy=True))
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

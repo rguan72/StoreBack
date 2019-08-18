@@ -28,6 +28,7 @@ def create_one_user():
     user = User()
     user.firstname = request.json['firstname']
     user.lastname = request.json['lastname']
+    user.password = request.json['password']
     user.email = request.json['email']
     db.session.add(user)
     db.session.commit()

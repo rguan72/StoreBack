@@ -10,6 +10,7 @@ class Admin(db.Model):
     firstname = db.Column(db.String(255), nullable=False)
     lastname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.Unicode(128))
     merchants = db.relationship('Merchant', backref='admin', lazy=True)
     keys = db.relationship('Key', backref='admin', lazy=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)
