@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from storeback.models import db
-from storeback.models.users import User, Inventory
+from storeback.models.users import User
+from storeback.models.inventories import Inventory
 
 user_api = Blueprint('user_api', __name__)
 

@@ -1,6 +1,7 @@
 from datetime import datetime
 from . import db
 from .merchants import Merchant
+from .keys import Key
 
 
 class Admin(db.Model):
@@ -10,6 +11,7 @@ class Admin(db.Model):
     lastname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
     merchants = db.relationship('Merchant', backref='admin', lazy=True)
+    keys = db.relationship('Key', backref='admin', lazy=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
