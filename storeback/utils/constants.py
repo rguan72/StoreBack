@@ -1,0 +1,1 @@
+APIKEY_HEADER = "X-StoreBack-Key"

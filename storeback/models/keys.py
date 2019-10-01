@@ -12,8 +12,9 @@ class Key(db.Model):
 
     def to_json(self):
         res = {}
-        for field in ('id', 'value', 'admin_id', 'created', 'updated'):
+        for field in ('id', 'value', 'created', 'updated'):
             res[field] = getattr(self, field)
+        res['admin'] = self.admin.to_json()
         return res
 
     def __repr__(self):

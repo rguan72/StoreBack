@@ -12,6 +12,8 @@ pytest = "*"
 sqlalchemy-utils = "*"
 python-dotenv = "*"
 mysqlclient = "*"
+graphene-sqlalchemy = "*"
+flask-graphql = "*"
 
 [requires]
 python_version = "3.7"

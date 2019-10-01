@@ -8,7 +8,7 @@ class Inventory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     price = db.Column(db.Integer)
-    merchant_id = db.Column(db.Integer, db.ForeignKey('merchant.id'), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -17,7 +17,6 @@ class Inventory(db.Model):
         for field in ('id', 'name', 'price', 'created', 'updated'):
             value = getattr(self, field)
             res[field] = value
-        res['merchant'] = self.merchant.to_json()
 
         return res
 

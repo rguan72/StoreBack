@@ -36,7 +36,7 @@ def create_one_key():
 def validate_key():
     if not request.json:
         return 'Please provide a valid json body with your request', 400
-    key = Key.query.filter_by(value=request.json['value']).first_or_404()
+    key = Key.query.filter_by(value=request.json['value']).first()
     return jsonify({'admin_id': key.admin_id})
 
 @key_api.route('/api/key/<int:id>', methods=['DELETE'])
