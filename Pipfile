@@ -17,6 +17,7 @@ flask-graphql = "*"
 passlib = "*"
 flask-jwt-extended = "*"
 gunicorn = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"

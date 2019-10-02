@@ -1,8 +1,10 @@
 from flask import Blueprint, request, jsonify
+from flask_cors import CORS
 from storeback.models import db
 from storeback.models.admins import Admin
 
 admin_api = Blueprint('admin_api', __name__)
+CORS(admin_api)
 
 @admin_api.route('/api/admin', methods=['GET'])
 def get_all_admins():
@@ -24,7 +26,7 @@ def create_one_admin():
     admin.firstname = request.json['firstname']
     admin.lastname = request.json['lastname']
     admin.email = request.json['email']
-    admin.password = request.json['password']
+    admin.password = Admin.generate_hash(request.json['password'])
     db.session.add(admin)
     db.session.commit()
     return jsonify(admin.to_json())

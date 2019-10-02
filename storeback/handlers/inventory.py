@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify, abort
+from flask_cors import CORS
 from storeback.models import db
 from storeback.models.inventories import Inventory
 from storeback.models.keys import Key
 from storeback.utils import utils
 
 inventory_api = Blueprint('inventory_api', __name__)
+CORS(inventory_api)
 
 @inventory_api.route('/api/inventory', methods=['GET'])
 def get_all_items():

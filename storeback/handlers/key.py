@@ -1,10 +1,12 @@
 import secrets
 from flask import request, jsonify, Blueprint
+from flask_cors import CORS
 from storeback.models import db
 from storeback.models.keys import Key
 from storeback.models.admins import Admin
 
 key_api = Blueprint('key_api', __name__)
+CORS(key_api)
 
 @key_api.route('/api/key', methods=['GET'])
 def get_all_keys():
