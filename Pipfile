@@ -16,6 +16,7 @@ graphene-sqlalchemy = "*"
 flask-graphql = "*"
 passlib = "*"
 flask-jwt-extended = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
