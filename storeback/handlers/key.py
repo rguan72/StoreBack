@@ -25,12 +25,16 @@ def create_one_key():
     if not admin:
         return 'No admin matches the admin_id given', 400
     key = Key()
-    key.value = secrets.token_urlsafe(16)
+    key.key_code = secrets.token_urlsafe(8)
+    api_key = secrets.token_urlsafe(16)
+    key.value = Key.generate_hash(api_key)
     key.admin_id = admin.id
     db.session.add(key)
     db.session.commit()
 
-    return jsonify(key.to_json())
+    res = key.to_json()
+    res['value'] = api_key
+    return jsonify(res)
 
 @key_api.route('/api/key/validate', methods=['POST'])
 def validate_key():

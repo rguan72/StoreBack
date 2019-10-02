@@ -14,7 +14,7 @@ class Inventory(db.Model):
 
     def to_json(self):
         res = {}
-        for field in ('id', 'name', 'price', 'created', 'updated'):
+        for field in ('id', 'name', 'price', 'admin_id', 'created', 'updated'):
             value = getattr(self, field)
             res[field] = value
 

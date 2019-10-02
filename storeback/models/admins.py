@@ -1,4 +1,5 @@
 from datetime import datetime
+from passlib.hash import pbkdf2_sha256 as sha256
 from . import db
 from .keys import Key
 
@@ -13,6 +14,14 @@ class Admin(db.Model):
     keys = db.relationship('Key', backref='admin', lazy=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    @staticmethod
+    def generate_hash(password):
+        return sha256.hash(password)
+
+    @staticmethod
+    def verify_hash(password, hash):
+        return sha256.verify(password, hash)
 
     def to_json(self):
         res = {}

@@ -1,4 +1,5 @@
 from datetime import datetime
+from passlib.hash import pbkdf2_sha256 as sha256
 from . import db
 from .inventories import Inventory
 
@@ -17,6 +18,14 @@ class User(db.Model):
     carted = db.relationship('Inventory', secondary=carted_items, lazy='subquery', backref=db.backref('inventory', lazy=True))
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    @staticmethod
+    def generate_hash(password):
+        return sha256.hash(password)
+
+    @staticmethod
+    def verify_hash(password, hash):
+        return sha256.verify(password, hash)
 
     def to_json(self):
         res = {}
