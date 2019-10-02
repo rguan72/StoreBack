@@ -18,11 +18,11 @@ An API to serve as the backend for statically hosted online stores.
 
 - **Less work.** Get all the benefits of a fully functional dynamic website for your online store without any of the work of creating endpoints, managing a database, and deploying a back end.
 
-- **Simple** StoreBack is extremely lightweight and simple: there's no dashboard and no seperate accounts to manage.
+- **Simple.** StoreBack is extremely lightweight and simple: there's no dashboard and no seperate accounts to manage.
 
-- **Configurable** Since it is an API, StoreBack works for any front end -- build your online store with React, Vue, or any other framework of your choosing.
+- **Configurable.** Since it is an API, StoreBack works for any front end -- build your online store with React, Vue, or any other framework of your choosing.
 
-- **Host for pennies** StoreBack online stores don't require servers. You can create your own store with a static webpage to be served with a CDN and hosted on GitHub pages or Netlify.
+- **Host for pennies.** StoreBack online stores don't require servers. You can create your own store with a static webpage to be served with a CDN and hosted on GitHub pages or Netlify.
 
 ## Quick Start
 
