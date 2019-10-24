@@ -15,6 +15,7 @@ class User(db.Model):
     lastname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.Unicode(128))
+    admin_id = db.Column(db.Integer)
     carted = db.relationship('Inventory', secondary=carted_items, lazy='subquery', backref=db.backref('inventory', lazy=True))
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -29,7 +30,7 @@ class User(db.Model):
 
     def to_json(self):
         res = {}
-        for field in ('id', 'firstname', 'lastname', 'email', 'created', 'updated'):
+        for field in ('id', 'firstname', 'lastname', 'email', 'admin_id', 'created', 'updated'):
             res[field] = getattr(self, field)
         res['carted'] = [carted_item.to_json() for carted_item in self.carted]
         return res
